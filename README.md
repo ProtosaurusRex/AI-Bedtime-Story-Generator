@@ -1,26 +1,24 @@
 # Quickstart
 
-Simple example demonstrating the OpenAI Python client in a small Quickstart project.
+Small project demonstrating one way to call the OpenAI Responses API from Python:
 
-## What this is
-
-- Minimal project showing how to call the OpenAI Responses API from Python.
-- Includes `example.py` which loads an API key from a local `.env` file and sends a prompt.
+- `ST_App.py` — a Streamlit web app that lets a user enter a topic and generates a one-paragraph bedtime story.
 
 ## Files
 
-- `example.py` — example script that initializes the client and requests a response.
-- `.env` — environment file containing `OPENAI_API_KEY` (not committed to source control).
-- `venv/` — project virtual environment (local to this folder).
+- `ST_App.py` — Streamlit app (web UI) for generating bedtime stories.
+- `.env` — environment file containing `OPENAI_API_KEY` (keep private).
+- `venv/` — local virtual environment for this folder.
+- `requirements.txt` — pinned Python dependencies for the venv.
 
 ## Prerequisites
 
-- Python 3.10+ (or whichever your virtual environment uses).
+- Python 3.10+ (or compatible with the included `venv`).
 - A valid OpenAI API key.
 
 ## Setup
 
-1. Activate the included virtual environment (Windows PowerShell):
+1. Activate the virtual environment (PowerShell):
 
 ```powershell
 & .\venv\Scripts\Activate.ps1
@@ -32,34 +30,40 @@ Or (cmd):
 venv\Scripts\activate.bat
 ```
 
-2. Install dependencies (if not already installed):
+2. Install dependencies (if needed):
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in this directory with the `OPENAI_API_KEY` variable (if not present):
+3. Create a `.env` file in this directory with your API key:
 
 ```
 OPENAI_API_KEY=sk-...your-api-key...
 ```
 
-`example.py` uses `python-dotenv` to load the `.env` file automatically.
+`ST_App.py` calls `load_dotenv()` so the key in `.env` will be read at runtime.
 
-## Run the example
+## Running
 
-With the venv active:
+- Run the Streamlit app (open http://localhost:8501 in your browser):
 
 ```powershell
-python example.py
+streamlit run ST_App.py
 ```
 
-You should see a short generated response printed to stdout.
+The Streamlit app uses `ST_App.py` which:
+
+- Loads environment variables via `python-dotenv`.
+- Initializes the OpenAI client once at startup (`client = OpenAI()`).
+- Displays a text input for a story topic and a `Generate story` button.
+- On click, it calls `client.responses.create(model="gpt-5-nano", input=...)` and shows the returned `response.output_text`.
 
 ## Notes
 
-- Never commit your API key to source control. Keep it in `.env` and add `.env` to `.gitignore`.
-- If VS Code doesn't resolve imports, ensure the workspace Python interpreter is set to `./venv/Scripts/python.exe`.
+- Model: `ST_App.py` uses `gpt-5-nano` in the example; change the `model` parameter if needed.
+- Never commit your API key to source control. Add `.env` to `.gitignore`.
+- If imports are unresolved in VS Code, set the workspace interpreter to `./venv/Scripts/python.exe`.
 
 ## License
 
