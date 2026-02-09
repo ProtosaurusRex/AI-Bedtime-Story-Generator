@@ -8,7 +8,6 @@ Small project demonstrating one way to call the OpenAI Responses API from Python
 
 - `ST_App.py` — Streamlit app (web UI) for generating bedtime stories.
 - `.env` — environment file containing `OPENAI_API_KEY` (keep private).
-- `venv/` — local virtual environment for this folder.
 - `requirements.txt` — pinned Python dependencies for the venv.
 
 ## Prerequisites
@@ -18,19 +17,23 @@ Small project demonstrating one way to call the OpenAI Responses API from Python
 
 ## Setup
 
-1. Activate the virtual environment (PowerShell):
+1) Create and activate a virtual environment (recommended):
+
+PowerShell:
 
 ```powershell
-& .\venv\Scripts\Activate.ps1
+python -m venv .venv
+& .\.venv\Scripts\Activate.ps1
 ```
 
-Or (cmd):
+cmd.exe:
 
 ```bat
-venv\Scripts\activate.bat
+python -m venv .venv
+.venv\Scripts\activate.bat
 ```
 
-2. Install dependencies (if needed):
+2) Install dependencies:
 
 ```powershell
 pip install -r requirements.txt
@@ -68,3 +71,4 @@ The Streamlit app uses `ST_App.py` which:
 ## License
 
 This project contains example code; adapt and reuse as you like.
+
